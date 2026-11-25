@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Temirlan Altay — Software Engineering Student &amp; Developer</title>
+  <meta name="description" content="Portfolio of Temirlan Altay — Software Engineering undergraduate at Vilnius University focused on Frontend (React, Vue, JS/TS), Python automation, and Rust.">
+  <style>
+    :root {
+      --bg-light: #f8fafc;
+      --bg-dark: #0b1120;
+      --surface-light: #ffffff;
+      --surface-dark: #111827;
+      --surface-alt-light: #f1f5f9;
+      --surface-alt-dark: #1e293b;
+      --text-light: #0f172a;
+      --text-dark: #f1f5f9;
+      --muted-light: #475569;
+      --muted-dark: #94a3b8;
+      --border-light: #e2e8f0;
+      --border-dark: #1e293b;
+      --accent-light: #2563eb;
+      --accent-dark: #60a5fa;
+      --accent-soft-light: #eff6ff;
+      --accent-soft-dark: #172554;
+
+      --bg: var(--bg-light);
+      --surface: var(--surface-light);
+      --surface-alt: var(--surface-alt-light);
+      --text: var(--text-light);
+      --muted: var(--muted-light);
+      --border: var(--border-light);
+      --accent: var(--accent-light);
+      --accent-soft: var(--accent-soft-light);
+
+      color-scheme: light dark;
+      accent-color: var(--accent);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: var(--bg-dark);
+        --surface: var(--surface-dark);
+        --surface-alt: var(--surface-alt-dark);
+        --text: var(--text-dark);
+        --muted: var(--muted-dark);
+        --border: var(--border-dark);
+        --accent: var(--accent-dark);
+        --accent-soft: var(--accent-soft-dark);
+      }
+    }
+
+    @supports (color: light-dark(white, black)) {
+      :root {
+        --bg: light-dark(var(--bg-light), var(--bg-dark));
+        --surface: light-dark(var(--surface-light), var(--surface-dark));
+        --surface-alt: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+        --text: light-dark(var(--text-light), var(--text-dark));
+        --muted: light-dark(var(--muted-light), var(--muted-dark));
+        --border: light-dark(var(--border-light), var(--border-dark));
+        --accent: light-dark(var(--accent-light), var(--accent-dark));
+        --accent-soft: light-dark(var(--accent-soft-light), var(--accent-soft-dark));
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, p, ul {
+      margin-block: 0;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 960px;
+      margin-inline: auto;
+      padding-inline: 24px;
+    }
+
+    /* Header & Nav */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background-color: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-block: 14px;
+      gap: 16px;
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: 0.4px;
+      color: var(--text);
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* Hero */
+    .hero {
+      padding-block: 56px 40px;
+    }
+
+    .badge {
+      display: inline-block;
+      background-color: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid var(--border);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      max-width: 660px;
+      font-size: 1.05rem;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.94rem;
+      border: 1px solid var(--border);
+      background-color: var(--surface);
+      color: var(--text);
+    }
+
+    .btn.primary {
+      background-color: var(--accent);
+      color: #ffffff;
+      border-color: transparent;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .btn.primary {
+        color: #0b1120;
+      }
+    }
+
+    .btn:hover {
+      text-decoration: none;
+      opacity: 0.92;
+    }
+
+    /* Sections */
+    section {
+      padding-block: 36px;
+      border-top: 1px solid var(--border);
+    }
+
+    section h2 {
+      font-size: 1.35rem;
+      margin-bottom: 18px;
+      letter-spacing: -0.01em;
+    }
+
+    /* Projects Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .tag {
+      background-color: var(--surface-alt);
+      color: var(--text);
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .card-footer {
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .skill-box {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .skill-box h3 {
+      font-size: 0.98rem;
+      margin-bottom: 10px;
+    }
+
+    /* Timeline */
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .timeline-item {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .timeline-item h3 {
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .timeline-item p {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .date-pill {
+      background-color: var(--surface-alt);
+      color: var(--muted);
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding-block: 28px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-bar">
+      <a class="brand" href="#">Temirlan Altay</a>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#experience">Experience &amp; Education</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero" style="border-top: none;">
+      <span class="badge">Open to Remote &amp; Hybrid Internships</span>
+      <h1>Software Engineering Student &amp; Frontend / Python Developer</h1>
+      <p>
+        I'm Temirlan Altay, an undergraduate Software Engineering student at Vilnius University (&Scaron;iauliai Academy). I build responsive web interfaces in JavaScript/TypeScript, React, and Vue, automate workflows with Python bots, and explore systems programming in Rust.
+      </p>
+      <div class="cta-row">
+        <a class="btn primary" href="mailto:altaytemirlanz@gmail.com">Email Me</a>
+        <a class="btn" href="https://github.com/Temirlankz" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/temirlan-altay/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Featured Projects</h2>
+      <div class="grid">
+        <article class="card">
+          <div>
+            <h3>Telegram Translator Bot</h3>
+            <p>Automated Telegram bot built in Python that processes user commands and translates messages across languages via external translation APIs.</p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">Telegram Bot API</span>
+              <span class="tag">REST APIs</span>
+            </div>
+          </div>
+          <div class="card-footer">Personal Automation Project</div>
+        </article>
+
+        <article class="card">
+          <div>
+            <h3>Custom Lexical Tokenizer</h3>
+            <p>Lexical analyzer implemented in Rust to scan raw source text into structured token streams with clean state transitions and error handling.</p>
+            <div class="tags">
+              <span class="tag">Rust</span>
+              <span class="tag">Parsing</span>
+              <span class="tag">Systems</span>
+            </div>
+          </div>
+          <div class="card-footer">Systems Coursework</div>
+        </article>
+
+        <article class="card">
+          <div>
+            <h3>Vue.js E-Commerce Storefront</h3>
+            <p>Dynamic e-commerce web application fetching, filtering, and rendering live product catalogs from the DummyJSON REST API.</p>
+            <div class="tags">
+              <span class="tag">Vue.js</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">REST API</span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <a href="https://github.com/Temirlankz/Project_vue" target="_blank" rel="noopener noreferrer">View on GitHub &rarr;</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div>
+            <h3>Todo SPA with State Management</h3>
+            <p>Single Page Application featuring full CRUD workflows, user authentication, and centralized state management with NgRx.</p>
+            <div class="tags">
+              <span class="tag">Angular</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">NgRx</span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <a href="https://github.com/Temirlankz/Angular_Exam" target="_blank" rel="noopener noreferrer">View on GitHub &rarr;</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div>
+            <h3>Multi-Page Web Shop &amp; React API App</h3>
+            <p>Responsive multi-page storefronts with client-side authentication, persistent shopping cart logic, and live API data rendering.</p>
+            <div class="tags">
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">React</span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <a href="https://github.com/Temirlankz/web_project" target="_blank" rel="noopener noreferrer">View on GitHub &rarr;</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>Technical Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-box">
+          <h3>Frontend</h3>
+          <div class="tags">
+            <span class="tag">HTML5</span>
+            <span class="tag">CSS3</span>
+            <span class="tag">JavaScript (ES6+)</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">React.js</span>
+            <span class="tag">Vue.js</span>
+            <span class="tag">Angular</span>
+            <span class="tag">React Native</span>
+          </div>
+        </div>
+
+        <div class="skill-box">
+          <h3>Backend &amp; Systems</h3>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">Rust</span>
+            <span class="tag">PHP</span>
+            <span class="tag">SQL</span>
+            <span class="tag">REST APIs</span>
+          </div>
+        </div>
+
+        <div class="skill-box">
+          <h3>Tools &amp; Languages</h3>
+          <div class="tags">
+            <span class="tag">Git &amp; GitHub</span>
+            <span class="tag">Chrome DevTools</span>
+            <span class="tag">AI-Assisted Dev</span>
+            <span class="tag">English (C1+)</span>
+            <span class="tag">Russian (Fluent)</span>
+            <span class="tag">Kazakh (Native)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <h2>Experience &amp; Education</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div>
+            <h3>Freelance Web Developer &mdash; Remote</h3>
+            <p>Built responsive landing pages and interactive frontend components, integrated third-party REST APIs, and resolved cross-browser layout issues.</p>
+          </div>
+          <span class="date-pill">Jun 2023 &ndash; Aug 2023</span>
+        </div>
+
+        <div class="timeline-item">
+          <div>
+            <h3>Vilnius University &mdash; &Scaron;iauliai Academy</h3>
+            <p>B.Sc. in Software Engineering &bull; &Scaron;iauliai, Lithuania</p>
+          </div>
+          <span class="date-pill">2024 &ndash; 2028 (Expected)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div>
+            <h3>IT Step Academy</h3>
+            <p>Front-end Development Program (HTML/CSS, JavaScript, React, Vue, Angular)</p>
+          </div>
+          <span class="date-pill">2022 &ndash; 2024</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="container footer-row">
+      <span>Temirlan Altay &middot; &Scaron;iauliai, Lithuania</span>
+      <span>
+        <a href="mailto:altaytemirlanz@gmail.com">altaytemirlanz@gmail.com</a> &middot;
+        <a href="https://github.com/Temirlankz" target="_blank" rel="noopener noreferrer">GitHub</a> &middot;
+        <a href="https://www.linkedin.com/in/temirlan-altay/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </span>
+    </div>
+  </footer>
+</body>
+</html>
